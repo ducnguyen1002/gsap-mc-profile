@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minh Đức | Professional MC</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Thinner font weights: 300(Light), 400(Normal), 500(Medium) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Montserrat+Alternates:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconify -->
+    <script
+        src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- GSAP & Plugins -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Lưu ý: SplitText là plugin trả phí của GSAP Business, link dưới đây là bản trial để demo -->
+    <script src="https://assets.codepen.io/16327/SplitText3.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-title {
+            font-family: 'Montserrat Alternates', sans-serif;
+        }
+
+        /* Lenis required styles */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-neutral-50 text-neutral-900 antialiased selection:bg-neutral-900 selection:text-neutral-50 flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 left-0 w-full z-50 p-6 md:p-8 flex justify-between items-center pointer-events-none bg-neutral-50/80 backdrop-blur-md border-b border-neutral-200/50">
+        <div
+            class="text-lg font-medium tracking-tighter uppercase pointer-events-auto cursor-pointer">
+            MD.</div>
+        <div
+            class="hidden md:flex gap-8 text-xs font-normal tracking-widest uppercase text-neutral-500 pointer-events-auto">
+            <a href="#about"
+                class="hover:text-neutral-900 transition-colors">Giới thiệu</a>
+            <a href="#expertise"
+                class="hover:text-neutral-900 transition-colors">Chuyên môn</a>
+            <a href="#gallery"
+                class="hover:text-neutral-900 transition-colors">Thư viện</a>
+            <a href="#contact"
+                class="hover:text-neutral-900 transition-colors">Liên hệ</a>
+        </div>
+        <button
+            class="md:hidden pointer-events-auto text-neutral-500 hover:text-neutral-900 transition-colors">
+            <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"
+                style="stroke-width: 1.5;"></iconify-icon>
+        </button>
+
+        <!-- Scroll Progress Bar -->
+        <div
+            class="absolute bottom-0 translate-y-1/2 left-0 w-full h-[2px] bg-neutral-400 origin-left scale-x-0 scroll-progress z-50">
+        </div>
+    </nav>
+
+    <!-- Hero Section (Focused on Personal Image) -->
+    <section
+        class="relative min-h-screen w-full flex items-center pt-20 pb-12 md:py-32 overflow-hidden"
+        id="hero">
+        <div
+            class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-20">
+
+            <div
+                class="lg:col-span-5 flex flex-col items-start text-left order-2 lg:order-1">
+                <p
+                    class="hero-text text-xs md:text-sm font-normal tracking-widest uppercase text-neutral-500 mb-6">
+                    Người Dẫn Chuyện & Hoạt Náo Viên</p>
+                <h1
+                    class="hero-text text-6xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-none mb-8">
+                    MINH<br>ĐỨC</h1>
+                <p
+                    class="hero-text text-base md:text-lg font-light text-neutral-600 max-w-md">
+                    Kết nối cảm xúc, điều phối nhịp độ. Kiến tạo linh hồn cho
+                    những sự kiện đẳng cấp thông qua ngôn từ và phong thái
+                    chuyên nghiệp.</p>
+
+                <div
+                    class="hero-text mt-12 flex items-center gap-4 text-xs font-medium uppercase tracking-widest text-neutral-900">
+                    <span class="w-12 h-[1px] bg-neutral-300"></span>
+                    Cuộn để khám phá
+                </div>
+            </div>
+
+            <div
+                class="lg:col-span-7 relative h-[60vh] md:h-[80vh] w-full order-1 lg:order-2 hero-img-wrapper">
+                <div
+                    class="w-full h-full rounded-2xl overflow-hidden bg-neutral-200 relative">
+                    <img src="https://images.unsplash.com/photo-1675944963204-00c99840d8ed?q=80&w=663&auto=format&fit=crop"
+                        class="w-full h-full object-cover object-center hero-img scale-110"
+                        alt="MC Minh Đức Portrait">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section (Pinned Reveal) -->
+    <section class="relative bg-neutral-50" id="about">
+        <div
+            class="h-screen w-full flex items-center px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center w-full">
+                <div class="order-2 lg:order-1 about-content">
+                    <h2
+                        class="text-2xl md:text-3xl lg:text-4xl font-medium tracking-tight leading-snug text-neutral-900 about-title">
+                        Hơn một thập kỷ cầm mic, tôi tin rằng sự kiện thành công
+                        không chỉ nằm ở kịch bản hoàn hảo, mà ở cảm xúc chân
+                        thực được lan tỏa đến từng khách mời.
+                    </h2>
+
+                    <div
+                        class="mt-12 flex gap-8 border-t border-neutral-200 pt-8 about-stats opacity-0">
+                        <div>
+                            <div
+                                class="text-4xl font-medium tracking-tighter text-neutral-900 font-title">
+                                10 <span
+                                    class="text-neutral-700 text-2xl">+</span>
+                            </div>
+                            <div
+                                class="text-xs font-normal text-neutral-500 uppercase tracking-widest mt-2">
+                                Năm kinh nghiệm</div>
+                        </div>
+                        <div>
+                            <div
+                                class="text-4xl font-medium tracking-tighter text-neutral-900 font-title">
+                                500 <span
+                                    class="text-neutral-700 text-2xl">+</span>
+                            </div>
+                            <div
+                                class="text-xs font-normal text-neutral-500 uppercase tracking-widest mt-2">
+                                Sự kiện thành công</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="order-1 lg:order-2 relative aspect-[4/5] w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-2xl bg-neutral-100 about-img-container shadow-2xl shadow-neutral-900/5">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop"
+                        alt="MC Portrait Behind Scenes"
+                        class="w-full h-full object-cover about-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section (Impressive Animations) -->
+    <section class="py-32 bg-neutral-100 w-full" id="expertise">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex items-center gap-4 mb-24 text-neutral-400">
+                <div class="w-2 h-2 rounded-full bg-current"></div>
+                <h2 class="text-xs font-normal tracking-widest uppercase">Lĩnh
+                    vực chuyên môn</h2>
+            </div>
+
+            <div class="space-y-32 md:space-y-48">
+
+                <!-- Service 1 -->
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center service-row">
+                    <div class="lg:col-span-5 lg:col-start-1 order-2 lg:order-1 flex flex-col justify-center service-text"
+                        style="perspective: 1000px;">
+                        <div
+                            class="text-xs font-normal text-neutral-400 uppercase tracking-widest mb-4">
+                            01</div>
+                        <h3
+                            class="text-3xl md:text-4xl font-medium tracking-tight mb-6 text-neutral-900">
+                            Gala Dinner & Corporate</h3>
+                        <p
+                            class="text-base text-neutral-500 font-light leading-relaxed">
+                            Định hình phong cách sang trọng, chuyên nghiệp. Xử
+                            lý tình huống linh hoạt, giữ nhịp chương trình mượt
+                            mà từ phần lễ trang trọng đến phần hội bùng nổ.
+                        </p>
+                    </div>
+                    <div
+                        class="lg:col-span-6 lg:col-start-7 order-1 lg:order-2 h-[50vh] lg:h-[70vh] w-full bg-neutral-200 img-container rounded-2xl overflow-hidden shadow-2xl shadow-neutral-900/5">
+                        <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover parallax-img scale-125"
+                            alt="Gala Event">
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center service-row">
+                    <div
+                        class="lg:col-span-6 lg:col-start-1 h-[50vh] lg:h-[70vh] w-full bg-neutral-200 img-container rounded-2xl overflow-hidden shadow-2xl shadow-neutral-900/5">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover parallax-img scale-125"
+                            alt="Wedding">
+                    </div>
+                    <div class="lg:col-span-5 lg:col-start-8 flex flex-col justify-center service-text"
+                        style="perspective: 1000px;">
+                        <div
+                            class="text-xs font-normal text-neutral-400 uppercase tracking-widest mb-4">
+                            02</div>
+                        <h3
+                            class="text-3xl md:text-4xl font-medium tracking-tight mb-6 text-neutral-900">
+                            Tiệc Cưới Cao Cấp</h3>
+                        <p
+                            class="text-base text-neutral-500 font-light leading-relaxed">
+                            Người kể chuyện tình yêu tinh tế. Dẫn dắt những
+                            khoảnh khắc lãng mạn, thiêng liêng nhất, đồng thời
+                            tạo ra tiếng cười ấm áp kết nối hai bên gia đình và
+                            quan khách.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div
+                    class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center service-row">
+                    <div class="lg:col-span-5 lg:col-start-1 order-2 lg:order-1 flex flex-col justify-center service-text"
+                        style="perspective: 1000px;">
+                        <div
+                            class="text-xs font-normal text-neutral-400 uppercase tracking-widest mb-4">
+                            03</div>
+                        <h3
+                            class="text-3xl md:text-4xl font-medium tracking-tight mb-6 text-neutral-900">
+                            Mega Game Show</h3>
+                        <p
+                            class="text-base text-neutral-500 font-light leading-relaxed">
+                            Năng lượng vô tận. Khả năng hoạt náo đỉnh cao, tương
+                            tác đám đông xuất sắc, kiểm soát luật chơi và đẩy
+                            cao trào cảm xúc cho các sự kiện quy mô hàng nghìn
+                            người.
+                        </p>
+                    </div>
+                    <div
+                        class="lg:col-span-6 lg:col-start-7 order-1 lg:order-2 h-[50vh] lg:h-[70vh] w-full bg-neutral-200 img-container rounded-2xl overflow-hidden shadow-2xl shadow-neutral-900/5">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover parallax-img scale-125"
+                            alt="Game Show">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (Stacking Cards) -->
+    <section class="relative bg-neutral-200 text-white py-32 h-screen"
+        id="testimonials">
+        <div
+            class="max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-center items-center">
+            <div class="flex items-center gap-4 mb-16 text-neutral-500">
+                <div class="w-2 h-2 rounded-full bg-current"></div>
+                <h2 class="text-xs font-normal tracking-widest uppercase">Đánh
+                    giá từ khách hàng</h2>
+            </div>
+
+            <div class="relative w-full max-w-3xl h-[450px] stack-container">
+
+                <!-- Card 1 -->
+                <div
+                    class="absolute inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card">
+                    <iconify-icon icon="ri:double-quotes-l"
+                        class="text-5xl md:text-6xl text-neutral-700"></iconify-icon>
+                    <p
+                        class="text-xl md:text-2xl font-light italic leading-relaxed text-neutral-200">
+                        "Minh Đức có khả năng điều phối chương trình cực kỳ tinh
+                        tế. Anh ấy biết cách làm nóng bầu không khí nhưng vẫn
+                        giữ được sự trang trọng cần thiết của một buổi Gala."
+                    </p>
+                    <div class="flex items-center gap-4 mt-8">
+                        <div
+                            class="w-12 h-12 rounded-full bg-neutral-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Nguyễn Minh Quân
+                            </h4>
+                            <p
+                                class="text-xs text-neutral-400 uppercase tracking-widest">
+                                CEO, Tech Summit 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="absolute inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card">
+                    <iconify-icon icon="ri:double-quotes-l"
+                        class="text-5xl md:text-6xl text-neutral-700"></iconify-icon>
+                    <p
+                        class="text-xl md:text-2xl font-light italic leading-relaxed text-neutral-200">
+                        "Một phong cách dẫn dắt rất riêng, lôi cuốn và đầy cảm
+                        xúc. Đám cưới của chúng mình đã trở nên trọn vẹn hơn rất
+                        nhiều nhờ sự dẫn dắt của anh Đức."
+                    </p>
+                    <div class="flex items-center gap-4 mt-8">
+                        <div
+                            class="w-12 h-12 rounded-full bg-neutral-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&h=100&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Lê Thùy Chi</h4>
+                            <p
+                                class="text-xs text-neutral-400 uppercase tracking-widest">
+                                Bridal Boutique Owner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="absolute inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card">
+                    <iconify-icon icon="ri:double-quotes-l"
+                        class="text-5xl md:text-6xl text-neutral-700"></iconify-icon>
+                    <p
+                        class="text-xl md:text-2xl font-light italic leading-relaxed text-neutral-200">
+                        "Năng lượng và bản lĩnh sân khấu tuyệt vời. Minh Đức
+                        thực sự là một mảnh ghép hoàn hảo cho các Game Show quy
+                        mô lớn."
+                    </p>
+                    <div class="flex items-center gap-4 mt-8">
+                        <div
+                            class="w-12 h-12 rounded-full bg-neutral-100 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&h=100&auto=format&fit=crop"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-white">Trần Việt Bách
+                            </h4>
+                            <p
+                                class="text-xs text-neutral-400 uppercase tracking-widest">
+                                Show Runner, VTV Event</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Showcase Gallery Section -->
+    <section class="py-32 w-full bg-neutral-50" id="gallery">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="flex items-center gap-4 mb-16 text-neutral-400">
+                <div class="w-2 h-2 rounded-full bg-current"></div>
+                <h2 class="text-xs font-normal tracking-widest uppercase">Khoảnh
+                    khắc thực tế</h2>
+            </div>
+
+            <!-- Focus Hover Group (Higher Z-Index for Scatter effect) -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[300px] md:auto-rows-[350px] group relative ">
+
+                <!-- Item 1 (Large Span) -->
+                <div
+                    class="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-neutral-900/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                        <h4
+                            class="text-xl md:text-2xl font-medium tracking-tight mb-2 text-white">
+                            Countdown Festival</h4>
+                        <p class="text-sm text-neutral-300 font-light">
+                            Điều phối 50.000+ khán giả cuồng nhiệt</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div
+                    class="md:col-span-1 md:row-span-1 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1170&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+                        <h4 class="text-lg font-medium tracking-tight">Gala
+                            Dinner</h4>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div
+                    class="md:col-span-1 md:row-span-1 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+                        <h4 class="text-lg font-medium tracking-tight">Luxury
+                            Wedding</h4>
+                    </div>
+                </div>
+
+                <!-- Item 4 (Dynamic Span) -->
+                <div
+                    class="md:col-span-2 md:row-span-1 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2000&auto=format&fit=crop"
+                        class="w-full h-full object-cover object-top"
+                        alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+                        <h4 class="text-lg font-medium tracking-tight">Corporate
+                            Summit</h4>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div
+                    class="md:col-span-1 md:row-span-1 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?q=80&w=1974&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+                        <h4 class="text-lg font-medium tracking-tight">Awards
+                            Night</h4>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div
+                    class="md:col-span-1 md:row-span-1 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+                        <h4 class="text-lg font-medium tracking-tight">Music
+                            Festival</h4>
+                    </div>
+                </div>
+
+                <!-- Item 7 (Wide) -->
+                <div
+                    class="md:col-span-2 md:row-span-1 relative overflow-hidden rounded-2xl bg-neutral-200 gallery-item cursor-pointer transition-all duration-700 ease-out group-hover:blur-[2px] group-hover:opacity-40 hover:!blur-none hover:!opacity-100 hover:!scale-[1.03] hover:z-10">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Event Moment">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+                        <h4 class="text-lg font-medium tracking-tight">Game Show
+                            Fever</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer
+        class="relative py-32 md:py-48 px-6 md:px-12 w-full bg-neutral-100 overflow-hidden"
+        id="contact">
+        <!-- Floating Text background -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] font-black text-neutral-200/50 select-none pointer-events-none uppercase tracking-tighter whitespace-nowrap">
+            CONTACT
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Top Section: CTA + Info -->
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-end mb-32 contact-reveal">
+
+                <!-- Left: Big Question -->
+                <div class="text-left">
+                    <div class="flex items-center gap-4 mb-8 text-neutral-400">
+                        <span class="w-12 h-[1px] bg-neutral-300"></span>
+                        <span
+                            class="text-xs font-normal tracking-widest uppercase">Start
+                            a Project</span>
+                    </div>
+                    <h2
+                        class="text-4xl md:text-5xl font-medium tracking-tighter leading-[0.9] text-neutral-900 footer-title">
+                        Sẵn sàng kiến tạo<br><span class="text-neutral-400">dấu
+                            ấn riêng?</span>
+                    </h2>
+                </div>
+
+                <!-- Right: Massive Hotline -->
+                <div
+                    class="flex flex-col items-start lg:items-end text-left lg:text-right">
+                    <p
+                        class="text-xs font-semibold tracking-widest text-neutral-400 uppercase mb-6">
+                        Booking Hotline</p>
+                    <a href="tel:0901234567"
+                        class="group relative inline-flex items-center gap-6 text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-neutral-900 transition-all duration-500 hover:scale-[1.02]">
+                        0909.888.999
+                        <div
+                            class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-neutral-200 flex items-center justify-center group-hover:bg-neutral-900 group-hover:text-white group-hover:border-neutral-900 transition-all duration-500">
+                            <iconify-icon icon="solar:phone-calling-bold"
+                                class="text-3xl md:text-4xl"></iconify-icon>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Middle Section: Secondary Contact + Socials -->
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-center py-12 border-y border-neutral-200 contact-reveal">
+                <a href="mailto:booking@minhduc.mc"
+                    class="group flex items-center gap-4 text-xl md:text-2xl font-light tracking-wide text-neutral-600 hover:text-neutral-900 transition-colors duration-300 mb-8 md:mb-0">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-neutral-200/50 flex items-center justify-center group-hover:bg-neutral-900 group-hover:text-white transition-all duration-300">
+                        <iconify-icon icon="solar:letter-linear"
+                            class="text-xl"></iconify-icon>
+                    </div>
+                    booking@minhduc.mc
+                </a>
+
+                <div class="flex flex-wrap gap-8 md:gap-12 contact-reveal">
+                    <a href="#"
+                        class="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500 hover:text-neutral-900 transition-colors border-b border-transparent hover:border-neutral-900 pb-1">Instagram</a>
+                    <a href="#"
+                        class="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500 hover:text-neutral-900 transition-colors border-b border-transparent hover:border-neutral-900 pb-1">Facebook</a>
+                    <a href="#"
+                        class="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500 hover:text-neutral-900 transition-colors border-b border-transparent hover:border-neutral-900 pb-1">Youtube</a>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Copyright -->
+            <div
+                class="mt-12 flex justify-between items-center text-[10px] font-medium text-neutral-400 uppercase tracking-[0.3em]">
+                <span>&copy; 2024 MINH DUC. ALL RIGHTS RESERVED.</span>
+                <span class="hidden md:block">BASED IN SAIGON, VN</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button
+        class="fixed bottom-8 right-8 z-50 p-4 border border-neutral-200 bg-white/80 backdrop-blur-md rounded-full text-neutral-900 shadow-xl opacity-0 pointer-events-none translate-y-10 transition-all duration-700 back-to-top group hover:bg-neutral-900 hover:text-white hover:border-neutral-900">
+        <iconify-icon icon="solar:arrow-up-linear"
+            class="text-2xl group-hover:scale-110 transition-transform"></iconify-icon>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Initialize Lenis for Smooth Scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        })
+
+        // Connect Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add((time) => { lenis.raf(time * 1000) })
+        gsap.ticker.lagSmoothing(0)
+
+        // 2. Register GSAP Plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 3. Animations
+
+        // Hero Reveal
+        const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+        heroTl.fromTo(".hero-img-wrapper",
+            { clipPath: "inset(100% 0% 0% 0%)", scale: 0.95 },
+            { clipPath: "inset(0% 0% 0% 0%)", scale: 1, duration: 1.8 }
+        )
+            .fromTo(".hero-img",
+                { scale: 1.2 },
+                { scale: 1, duration: 1.8 },
+                "<"
+            )
+            .fromTo(".hero-text",
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1.2, stagger: 0.1 },
+                "-=1.2"
+            );
+
+        // Hero Image Parallax Scroll
+        gsap.to(".hero-img", {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // 4. Pin About Section & SplitText Reveal (Professional implementation)
+        const aboutTitle = document.querySelector(".about-title");
+
+        // Register SplitText (Check if loaded)
+        if (typeof SplitText !== "undefined") {
+            const split = new SplitText(aboutTitle, { type: "lines, words", linesClass: "overflow-hidden" });
+            const words = split.words;
+
+            const aboutTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#about",
+                    start: "top top",
+                    end: "+=150%",
+                    pinSpacing: true,
+                    pin: true,
+                    scrub: 1,
+                }
+            });
+
+            // Hiệu ứng hiện từng chữ bằng SplitText
+            aboutTl.from(words, {
+                opacity: 0.1,
+                y: 40,
+                rotateX: -45,
+                stagger: 0.2,
+                duration: 1,
+                ease: "power2.out",
+                color: "#a3a3a3", // Chuyển từ xám sang đen
+            })
+                .to(".about-stats", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                }, ">-0.5")
+                .to(".about-img", {
+                    scale: 1.15,
+                    duration: aboutTl.duration(),
+                    ease: "none"
+                }, 0);
+
+            // Refresh on resize for SplitText responsive
+            window.addEventListener("resize", () => {
+                split.revert();
+                // re-run split if needed
+            });
+        }
+
+        // 6. Testimonials Stacking Effect
+        const cards = gsap.utils.toArray(".testimonial-card");
+
+        // Initial setup for cards (stacking)
+        cards.forEach((card, i) => {
+            if (i > 0) {
+                // Initial state for stacking cards with a slight rotation offset
+                gsap.set(card, { yPercent: 120, scale: 0.9, opacity: 0, rotation: i % 2 === 0 ? 5 : -5 });
+            }
+        });
+
+        const testimonialTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#testimonials",
+                start: "top top",
+                end: `+=${cards.length * 80}%`,
+                pinSpacing: true,
+                pin: true,
+                scrub: 1,
+            }
+        });
+
+        cards.forEach((card, i) => {
+            const tilt = (i % 2 === 0 ? 2 : -2) + (Math.random() * 0.5);
+
+            if (i > 0) {
+                testimonialTl.to(card, {
+                    yPercent: 0,
+                    rotation: tilt,
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1,
+                    ease: "power2.out",
+                })
+                    .to(cards[i - 1], {
+                        scale: 0.95,
+                        opacity: 0.8,
+                        filter: "blur(4px)",
+                        rotation: tilt * 0.4,
+                        duration: 1,
+                        ease: "power2.out",
+                    }, "<");
+            } else {
+                gsap.set(cards[0], { rotation: -1.5 });
+            }
+        });
+
+        // Advanced Services Parallax & 3D Reveal
+        gsap.utils.toArray('.service-row').forEach(row => {
+            const imgContainer = row.querySelector('.img-container');
+            const img = row.querySelector('.parallax-img');
+            const textElements = row.querySelectorAll('.service-text > *');
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: row,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // Complex impressive reveal for images
+            tl.fromTo(imgContainer,
+                { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", scale: 1.5 },
+                { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", scale: 1, duration: 1.5, ease: "power4.inOut" }
+            )
+                .fromTo(img,
+                    { scale: 1 },
+                    { scale: 1.25, duration: 1.5, ease: "power4.inOut" },
+                    "<"
+                )
+                // 3D Text Reveal
+                .fromTo(textElements,
+                    { y: 60, opacity: 0, rotationX: -40 },
+                    { y: 0, opacity: 1, rotationX: 0, duration: 1.2, stagger: 0.1, ease: "power3.out" },
+                    "-=1.0"
+                );
+
+            // Parallax effect on scroll
+            gsap.to(img, {
+                yPercent: 15,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: row,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+
+        // 8. Scroll Progress Bar Animation
+        gsap.to(".scroll-progress", {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.3
+            }
+        });
+
+        // Remove the old gallery stagger to avoid conflict
+
+        // Footer Contact Reveal (Enhanced with SplitText)
+        const footerTitle = document.querySelector(".footer-title");
+        if (typeof SplitText !== "undefined" && footerTitle) {
+            const footerSplit = new SplitText(footerTitle, { type: "words,chars", wordsClass: "overflow-hidden" });
+
+            gsap.from(footerSplit.words, {
+                yPercent: 100,
+                rotateX: -30,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.05,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: "#contact",
+                    start: "top 75%",
+                },
+                color: "#a3a3a3",
+                scrub: true
+
+            });
+        }
+
+        gsap.fromTo(".contact-reveal:not(.footer-title)",
+            { y: 60, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 1.5, stagger: 0.2, ease: "power4.out",
+                scrollTrigger: { trigger: "#contact", start: "top 70%" }
+            }
+        );
+
+        // 9. Back to Top Logic
+        const btt = document.querySelector(".back-to-top");
+        if (btt) {
+            ScrollTrigger.create({
+                trigger: "body",
+                start: "500px top",
+                onEnter: () => gsap.to(btt, { opacity: 1, y: 0, pointerEvents: "auto", duration: 0.5 }),
+                onLeaveBack: () => gsap.to(btt, { opacity: 0, y: 20, pointerEvents: "none", duration: 0.5 }),
+            });
+
+            btt.addEventListener("click", () => {
+                lenis.scrollTo(0, { duration: 2.5 });
+            });
+        }
+    </script>
+</body>
+
+</html>
