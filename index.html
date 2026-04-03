@@ -80,12 +80,22 @@
         * {
             -ms-overflow-style: none;
             scrollbar-width: none;
+            cursor: none !important;
         }
     </style>
 </head>
 
 <body
     class="bg-neutral-50 text-neutral-900 antialiased selection:bg-neutral-900 selection:text-neutral-50 flex flex-col min-h-screen">
+
+    <!-- Custom Cursor -->
+    <div class="fixed top-0 left-0 w-2 h-2 bg-neutral-900 rounded-full z-[9999] pointer-events-none cursor-dot"></div>
+    <div class="fixed top-0 left-0 w-8 h-8 border border-neutral-900/30 rounded-full z-[9998] pointer-events-none cursor-circle transition-all duration-300 ease-out flex items-center justify-center">
+        <iconify-icon icon="solar:phone-calling-bold"
+            class="text-[12px] opacity-0 cursor-icon-phone"></iconify-icon>
+        <iconify-icon icon="solar:letter-linear"
+            class="text-[12px] opacity-0 cursor-icon-email absolute"></iconify-icon>
+    </div>
 
     <!-- Navigation -->
     <nav
@@ -145,12 +155,21 @@
             </div>
 
             <div
-                class="lg:col-span-7 relative h-[60vh] md:h-[80vh] w-full order-1 lg:order-2 hero-img-wrapper">
+                class="lg:col-span-7 relative h-[60vh] md:h-[80vh] w-full order-1 lg:order-2 hero-img-wrapper group">
                 <div
-                    class="w-full h-full rounded-2xl overflow-hidden bg-neutral-200 relative">
+                    class="w-full h-full rounded-2xl overflow-hidden bg-neutral-200 relative  cursor-none">
                     <img src="https://images.unsplash.com/photo-1675944963204-00c99840d8ed?q=80&w=663&auto=format&fit=crop"
                         class="w-full h-full object-cover object-center hero-img scale-110"
                         alt="MC Minh Đức Portrait">
+
+                    <!-- Magnifying Glass Lens -->
+                    <div
+                        class="absolute inset-0 pointer-events-none ripple-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700 overflow-hidden rounded-2xl">
+                        <div class="ripple-spotlight absolute w-56 h-56 rounded-full border border-white/40 bg-no-repeat shadow-[0_0_50px_rgba(0,0,0,0.3)]"
+                            style="background-image: url('https://images.unsplash.com/photo-1675944963204-00c99840d8ed?q=80&w=663&auto=format&fit=crop'); background-size: 1200px auto; filter: contrast(1.1) saturate(1.1); transform: scale(1);">
+                        </div>
+                    </div>
+
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-neutral-900/20 to-transparent">
                     </div>
@@ -901,6 +920,76 @@
                 lenis.scrollTo(0, { duration: 2.5 });
             });
         }
+        // 11. Custom Cursor & Water Ripple Logic
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorCircle = document.querySelector(".cursor-circle");
+        const rippleSpotlight = document.querySelector(".ripple-spotlight");
+        const heroWrapper = document.querySelector(".hero-img-wrapper");
+
+        window.addEventListener("mousemove", (e) => {
+            // Cursor movement
+            gsap.to(cursorDot, { x: e.clientX, y: e.clientY, duration: 0, opacity: 1 });
+            gsap.to(cursorCircle, {
+                x: e.clientX - 14,
+                y: e.clientY - 14,
+                duration: 0.15,
+                opacity: 1
+            });
+
+            // Hero ripple movement
+            if (heroWrapper && heroWrapper.matches(":hover")) {
+                const rect = heroWrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Magnifying glass background position logic
+                // The lens should show the zoomed version of the EXACT spot beneath the cursor.
+                const zoomFactor = 1.4; // magnification level
+                const bgX = (x / rect.width) * 100;
+                const bgY = (y / rect.height) * 100;
+
+                gsap.to(rippleSpotlight, {
+                    x: x - 112, // center the 224px (w-56) spotlight
+                    y: y - 112,
+                    backgroundPosition: `${bgX}% ${bgY}%`,
+                    duration: 0.2, // fast follow for lens
+                    ease: "power2.out"
+                });
+            }
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener("mouseleave", () => {
+            gsap.to([cursorDot, cursorCircle], { opacity: 0 });
+        });
+
+        // Interactive states for cursor
+        const interactives = document.querySelectorAll("a, button, .gallery-item");
+        interactives.forEach(el => {
+            el.addEventListener("mouseenter", () => {
+                const isPhone = el.href && el.href.startsWith("tel:");
+                const isEmail = el.href && el.href.startsWith("mailto:");
+
+                if (isPhone || isEmail) {
+                    gsap.to(cursorCircle, { scale: 2.2, backgroundColor: "rgba(0,0,0,0.9)", borderColor: "transparent", duration: 0.3 });
+                    gsap.to(cursorDot, { opacity: 0, duration: 0.2 });
+
+                    if (isPhone) gsap.to(".cursor-icon-phone", { opacity: 1, color: "white", scale: 1, duration: 0.3 });
+                    if (isEmail) gsap.to(".cursor-icon-email", { opacity: 1, color: "white", scale: 1, duration: 0.3 });
+                } else {
+                    gsap.to(cursorCircle, { scale: 1.8, backgroundColor: "rgba(0,0,0,0.05)", duration: 0.3 });
+                    gsap.to(cursorDot, { scale: 0.5, duration: 0.3 });
+                }
+            });
+
+            el.addEventListener("mouseleave", () => {
+                gsap.to(cursorCircle, { scale: 1, backgroundColor: "transparent", borderColor: "rgba(0,0,0,0.3)", duration: 0.3 });
+                gsap.to(cursorDot, { scale: 1, opacity: 1, duration: 0.3 });
+                gsap.to([".cursor-icon-phone", ".cursor-icon-email"], { opacity: 0, scale: 0.5, duration: 0.2 });
+            });
+        });
+
+        // 12. End Script
     </script>
 </body>
 
