@@ -22,7 +22,8 @@
         src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
     <!-- GSAP & Plugins -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script
         src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
     <script
@@ -57,6 +58,14 @@
 
         .lenis.lenis-stopped {
             overflow: hidden;
+        }
+
+        /* Prevent horizontal overflow */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
         }
 
         .lenis.lenis-scrolling iframe {
@@ -120,7 +129,7 @@
                     class="hero-text text-xs md:text-sm font-normal tracking-widest uppercase text-neutral-500 mb-6">
                     Người Dẫn Chuyện & Hoạt Náo Viên</p>
                 <h1
-                    class="hero-text text-6xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-none mb-8">
+                    class="hero-text main-title text-6xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-none mb-8">
                     MINH<br>ĐỨC</h1>
                 <p
                     class="hero-text text-base md:text-lg font-light text-neutral-600 max-w-md">
@@ -154,7 +163,7 @@
     <!-- About Section (Pinned Reveal) -->
     <section class="relative bg-neutral-50" id="about">
         <div
-            class="h-screen w-full flex items-center px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+            class="min-h-screen w-full flex items-center py-12 md:py-0 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
             <div
                 class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center w-full">
                 <div class="order-2 lg:order-1 about-content">
@@ -580,7 +589,7 @@
 
     <!-- Back to Top Button -->
     <button
-        class="fixed bottom-8 right-8 z-50 p-4 border border-neutral-200 bg-white/80 backdrop-blur-md rounded-full text-neutral-900 shadow-xl opacity-0 pointer-events-none translate-y-10 transition-all duration-700 back-to-top group hover:bg-neutral-900 hover:text-white hover:border-neutral-900">
+        class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border border-neutral-200 bg-white/80 backdrop-blur-md rounded-full text-neutral-900 shadow-xl opacity-0 pointer-events-none translate-y-10 transition-all duration-700 back-to-top group hover:bg-neutral-900 hover:text-white hover:border-neutral-900">
         <iconify-icon icon="solar:arrow-up-linear"
             class="text-2xl group-hover:scale-110 transition-transform"></iconify-icon>
     </button>
@@ -610,218 +619,232 @@
 
         // 3. Animations
 
-        // Hero Reveal
-        const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
-        heroTl.fromTo(".hero-img-wrapper",
-            { clipPath: "inset(100% 0% 0% 0%)", scale: 0.95 },
-            { clipPath: "inset(0% 0% 0% 0%)", scale: 1, duration: 1.8 }
-        )
-            .fromTo(".hero-img",
-                { scale: 1.2 },
-                { scale: 1, duration: 1.8 },
-                "<"
+        document.fonts.ready.then(() => {
+            // Hero Reveal
+            const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+            const mainTitle = new SplitText(".main-title", { type: "chars" });
+
+
+            heroTl.fromTo(".hero-img-wrapper",
+                { clipPath: "inset(100% 0% 0% 0%)", scale: 0.95 },
+                { clipPath: "inset(0% 0% 0% 0%)", scale: 1, duration: 1.8 }
             )
-            .fromTo(".hero-text",
-                { y: 40, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1.2, stagger: 0.1 },
-                "-=1.2"
-            );
+                .fromTo(mainTitle.chars, {
+                    y: 40,
+                    opacity: 0
+                }, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    stagger: 0.1
+                }, "-=1.2")
+                .fromTo(".hero-img",
+                    { scale: 1.2 },
+                    { scale: 1, duration: 1.8 },
+                    "<"
+                )
+                .fromTo(".hero-text",
+                    { y: 40, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1.2, stagger: 0.1 },
+                    "-=1.2"
+                );
 
-        // Hero Image Parallax Scroll
-        gsap.to(".hero-img", {
-            yPercent: 15,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-
-        // 4. Pin About Section & SplitText Reveal (Professional implementation)
-        const aboutTitle = document.querySelector(".about-title");
-
-        // Register SplitText (Check if loaded)
-        if (typeof SplitText !== "undefined") {
-            const split = new SplitText(aboutTitle, { type: "lines, words", linesClass: "overflow-hidden" });
-            const words = split.words;
-
-            const aboutTl = gsap.timeline({
+            // Hero Image Parallax Scroll
+            gsap.to(".hero-img", {
+                yPercent: 15,
+                ease: "none",
                 scrollTrigger: {
-                    trigger: "#about",
+                    trigger: "#hero",
                     start: "top top",
-                    end: "+=150%",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // 4. Pin About Section & SplitText Reveal (Professional implementation)
+            const aboutTitle = document.querySelector(".about-title");
+
+            // Register SplitText (Check if loaded)
+            if (typeof SplitText !== "undefined") {
+                const split = new SplitText(aboutTitle, { type: "lines, words", linesClass: "overflow-hidden" });
+                const words = split.words;
+
+                const aboutTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#about",
+                        start: "top top",
+                        end: "+=150%",
+                        pinSpacing: true,
+                        pin: true,
+                        scrub: 1,
+                    }
+                });
+
+                // Hiệu ứng hiện từng chữ bằng SplitText
+                aboutTl.from(words, {
+                    opacity: 0.1,
+                    y: 40,
+                    rotateX: -45,
+                    stagger: 0.2,
+                    duration: 1,
+                    ease: "power2.out",
+                    color: "#a3a3a3", // Chuyển từ xám sang đen
+                })
+                    .to(".about-stats", {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power3.out"
+                    }, ">-0.5")
+                    .to(".about-img", {
+                        scale: 1.15,
+                        duration: aboutTl.duration(),
+                        ease: "none"
+                    }, 0);
+
+                // Refresh on resize for SplitText responsive
+                window.addEventListener("resize", () => {
+                    split.revert();
+                    // re-run split if needed
+                });
+            }
+
+            // 6. Testimonials Stacking Effect
+            const cards = gsap.utils.toArray(".testimonial-card");
+
+            // Initial setup for cards (stacking)
+            cards.forEach((card, i) => {
+                if (i > 0) {
+                    // Initial state for stacking cards with a slight rotation offset
+                    gsap.set(card, { yPercent: 120, scale: 0.9, opacity: 0, rotation: i % 2 === 0 ? 5 : -5 });
+                }
+            });
+
+            const testimonialTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#testimonials",
+                    start: "top top",
+                    end: `+=${cards.length * 80}%`,
                     pinSpacing: true,
                     pin: true,
                     scrub: 1,
                 }
             });
 
-            // Hiệu ứng hiện từng chữ bằng SplitText
-            aboutTl.from(words, {
-                opacity: 0.1,
-                y: 40,
-                rotateX: -45,
-                stagger: 0.2,
-                duration: 1,
-                ease: "power2.out",
-                color: "#a3a3a3", // Chuyển từ xám sang đen
-            })
-                .to(".about-stats", {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out"
-                }, ">-0.5")
-                .to(".about-img", {
-                    scale: 1.15,
-                    duration: aboutTl.duration(),
-                    ease: "none"
-                }, 0);
+            cards.forEach((card, i) => {
+                const tilt = (i % 2 === 0 ? 2 : -2) + (Math.random() * 0.5);
 
-            // Refresh on resize for SplitText responsive
-            window.addEventListener("resize", () => {
-                split.revert();
-                // re-run split if needed
-            });
-        }
-
-        // 6. Testimonials Stacking Effect
-        const cards = gsap.utils.toArray(".testimonial-card");
-
-        // Initial setup for cards (stacking)
-        cards.forEach((card, i) => {
-            if (i > 0) {
-                // Initial state for stacking cards with a slight rotation offset
-                gsap.set(card, { yPercent: 120, scale: 0.9, opacity: 0, rotation: i % 2 === 0 ? 5 : -5 });
-            }
-        });
-
-        const testimonialTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#testimonials",
-                start: "top top",
-                end: `+=${cards.length * 80}%`,
-                pinSpacing: true,
-                pin: true,
-                scrub: 1,
-            }
-        });
-
-        cards.forEach((card, i) => {
-            const tilt = (i % 2 === 0 ? 2 : -2) + (Math.random() * 0.5);
-
-            if (i > 0) {
-                testimonialTl.to(card, {
-                    yPercent: 0,
-                    rotation: tilt,
-                    scale: 1,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power2.out",
-                })
-                    .to(cards[i - 1], {
-                        scale: 0.95,
-                        opacity: 0.8,
-                        filter: "blur(4px)",
-                        rotation: tilt * 0.4,
+                if (i > 0) {
+                    testimonialTl.to(card, {
+                        yPercent: 0,
+                        rotation: tilt,
+                        scale: 1,
+                        opacity: 1,
                         duration: 1,
                         ease: "power2.out",
-                    }, "<");
-            } else {
-                gsap.set(cards[0], { rotation: -1.5 });
-            }
-        });
-
-        // Advanced Services Parallax & 3D Reveal
-        gsap.utils.toArray('.service-row').forEach(row => {
-            const imgContainer = row.querySelector('.img-container');
-            const img = row.querySelector('.parallax-img');
-            const textElements = row.querySelectorAll('.service-text > *');
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: row,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
+                    })
+                        .to(cards[i - 1], {
+                            scale: 0.95,
+                            opacity: 0.8,
+                            filter: "blur(4px)",
+                            rotation: tilt * 0.4,
+                            duration: 1,
+                            ease: "power2.out",
+                        }, "<");
+                } else {
+                    gsap.set(cards[0], { rotation: -1.5 });
                 }
             });
 
-            // Complex impressive reveal for images
-            tl.fromTo(imgContainer,
-                { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", scale: 1.5 },
-                { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", scale: 1, duration: 1.5, ease: "power4.inOut" }
-            )
-                .fromTo(img,
-                    { scale: 1 },
-                    { scale: 1.25, duration: 1.5, ease: "power4.inOut" },
-                    "<"
-                )
-                // 3D Text Reveal
-                .fromTo(textElements,
-                    { y: 60, opacity: 0, rotationX: -40 },
-                    { y: 0, opacity: 1, rotationX: 0, duration: 1.2, stagger: 0.1, ease: "power3.out" },
-                    "-=1.0"
-                );
+            // Advanced Services Parallax & 3D Reveal
+            gsap.utils.toArray('.service-row').forEach(row => {
+                const imgContainer = row.querySelector('.img-container');
+                const img = row.querySelector('.parallax-img');
+                const textElements = row.querySelectorAll('.service-text > *');
 
-            // Parallax effect on scroll
-            gsap.to(img, {
-                yPercent: 15,
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: row,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
+                // Complex impressive reveal for images
+                tl.fromTo(imgContainer,
+                    { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)", scale: 1.5 },
+                    { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", scale: 1, duration: 1.5, ease: "power4.inOut" }
+                )
+                    .fromTo(img,
+                        { scale: 1 },
+                        { scale: 1.25, duration: 1.5, ease: "power4.inOut" },
+                        "<"
+                    )
+                    // 3D Text Reveal
+                    .fromTo(textElements,
+                        { y: 60, opacity: 0, rotationX: -40 },
+                        { y: 0, opacity: 1, rotationX: 0, duration: 1.2, stagger: 0.1, ease: "power3.out" },
+                        "-=1.0"
+                    );
+
+                // Parallax effect on scroll
+                gsap.to(img, {
+                    yPercent: 15,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: row,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            });
+
+
+            // 8. Scroll Progress Bar Animation
+            gsap.to(".scroll-progress", {
+                scaleX: 1,
                 ease: "none",
                 scrollTrigger: {
-                    trigger: row,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0.3
                 }
             });
-        });
 
+            // Remove the old gallery stagger to avoid conflict
 
-        // 8. Scroll Progress Bar Animation
-        gsap.to(".scroll-progress", {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 0.3
+            // Footer Contact Reveal (Enhanced with SplitText)
+            const footerTitle = document.querySelector(".footer-title");
+            if (typeof SplitText !== "undefined" && footerTitle) {
+                const footerSplit = new SplitText(footerTitle, { type: "words,chars", wordsClass: "overflow-hidden" });
+
+                gsap.from(footerSplit.words, {
+                    yPercent: 100,
+                    rotateX: -30,
+                    opacity: 0,
+                    duration: 1.2,
+                    stagger: 0.05,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: "#contact",
+                        start: "top 75%",
+                        scrub: true
+                    },
+                    color: "#a3a3a3",
+
+                });
             }
-        });
 
-        // Remove the old gallery stagger to avoid conflict
-
-        // Footer Contact Reveal (Enhanced with SplitText)
-        const footerTitle = document.querySelector(".footer-title");
-        if (typeof SplitText !== "undefined" && footerTitle) {
-            const footerSplit = new SplitText(footerTitle, { type: "words,chars", wordsClass: "overflow-hidden" });
-
-            gsap.from(footerSplit.words, {
-                yPercent: 100,
-                rotateX: -30,
-                opacity: 0,
-                duration: 1.2,
-                stagger: 0.05,
-                ease: "power4.out",
-                scrollTrigger: {
-                    trigger: "#contact",
-                    start: "top 75%",
-                },
-                color: "#a3a3a3",
-                scrub: true
-
-            });
-        }
-
-        gsap.fromTo(".contact-reveal:not(.footer-title)",
-            { y: 60, opacity: 0 },
-            {
-                y: 0, opacity: 1, duration: 1.5, stagger: 0.2, ease: "power4.out",
-                scrollTrigger: { trigger: "#contact", start: "top 70%" }
-            }
-        );
+            gsap.fromTo(".contact-reveal:not(.footer-title)",
+                { y: 60, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.5, stagger: 0.2, ease: "power4.out",
+                    scrollTrigger: { trigger: "#contact", start: "top 70%" }
+                }
+            );
+        })
 
         // 9. Back to Top Logic
         const btt = document.querySelector(".back-to-top");
