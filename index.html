@@ -163,7 +163,7 @@
     <!-- About Section (Pinned Reveal) -->
     <section class="relative bg-neutral-50" id="about">
         <div
-            class="min-h-screen w-full flex items-center py-12 md:py-0 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+            class="min-h-screen w-full flex items-center py-12 md:py-20 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
             <div
                 class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center w-full">
                 <div class="order-2 lg:order-1 about-content">
@@ -304,22 +304,25 @@
         </div>
     </section>
 
-    <!-- Testimonials Section (Stacking Cards) -->
-    <section class="relative bg-neutral-200 text-white py-32 h-screen"
+    <!-- Testimonials Section (Stacking Cards on Desktop, List on Mobile) -->
+    <section
+        class="relative bg-neutral-200 text-white py-24 md:py-32 md:h-screen"
         id="testimonials">
         <div
-            class="max-w-7xl mx-auto px-6 md:px-12 h-full flex flex-col justify-center items-center">
-            <div class="flex items-center gap-4 mb-16 text-neutral-500">
+            class="max-w-7xl mx-auto px-6 md:px-12 md:h-full flex flex-col justify-center items-center">
+            <div
+                class="flex items-center gap-4 mb-12 md:mb-16 text-neutral-500">
                 <div class="w-2 h-2 rounded-full bg-current"></div>
                 <h2 class="text-xs font-normal tracking-widest uppercase">Đánh
                     giá từ khách hàng</h2>
             </div>
 
-            <div class="relative w-full max-w-3xl h-[450px] stack-container">
+            <div
+                class="relative w-full max-w-3xl flex flex-col gap-6 md:gap-0 md:h-[450px] stack-container">
 
                 <!-- Card 1 -->
                 <div
-                    class="absolute inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card">
+                    class="relative md:absolute md:inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card min-h-[350px] md:min-h-0">
                     <iconify-icon icon="ri:double-quotes-l"
                         class="text-5xl md:text-6xl text-neutral-700"></iconify-icon>
                     <p
@@ -346,7 +349,7 @@
 
                 <!-- Card 2 -->
                 <div
-                    class="absolute inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card">
+                    class="relative md:absolute md:inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card min-h-[350px] md:min-h-0">
                     <iconify-icon icon="ri:double-quotes-l"
                         class="text-5xl md:text-6xl text-neutral-700"></iconify-icon>
                     <p
@@ -372,7 +375,7 @@
 
                 <!-- Card 3 -->
                 <div
-                    class="absolute inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card">
+                    class="relative md:absolute md:inset-0 bg-neutral-800 p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl flex flex-col justify-between testimonial-card min-h-[350px] md:min-h-0">
                     <iconify-icon icon="ri:double-quotes-l"
                         class="text-5xl md:text-6xl text-neutral-700"></iconify-icon>
                     <p
@@ -413,7 +416,7 @@
 
             <!-- Focus Hover Group (Higher Z-Index for Scatter effect) -->
             <div
-                class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[300px] md:auto-rows-[350px] group relative ">
+                class="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 lg:gap-4 auto-rows-[200px] md:auto-rows-[250px] lg:auto-rows-[350px] group relative ">
 
                 <!-- Item 1 (Large Span) -->
                 <div
@@ -451,7 +454,9 @@
                         class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
                         <h4 class="text-lg font-medium tracking-tight">Luxury
                             Wedding</h4>
-                        <p class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">Đám cưới cao cấp</p>
+                        <p
+                            class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">
+                            Đám cưới cao cấp</p>
                     </div>
                 </div>
 
@@ -465,7 +470,9 @@
                         class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
                         <h4 class="text-lg font-medium tracking-tight">Corporate
                             Summit</h4>
-                        <p class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">Hội nghị doanh nghiệp</p>
+                        <p
+                            class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">
+                            Hội nghị doanh nghiệp</p>
                     </div>
                 </div>
 
@@ -478,7 +485,9 @@
                         class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
                         <h4 class="text-lg font-medium tracking-tight">Awards
                             Night</h4>
-                        <p class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">Lễ trao giải</p>
+                        <p
+                            class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">
+                            Lễ trao giải</p>
                     </div>
                 </div>
 
@@ -491,7 +500,9 @@
                         class="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
                         <h4 class="text-lg font-medium tracking-tight">Music
                             Festival</h4>
-                        <p class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">Lễ hội âm nhạc</p>
+                        <p
+                            class="text-[10px] text-neutral-300 uppercase tracking-widest mt-1">
+                            Lễ hội âm nhạc</p>
                     </div>
                 </div>
 
@@ -713,50 +724,74 @@
                 });
             }
 
-            // 6. Testimonials Stacking Effect
+            // 6. Testimonials Stacking Effect (Desktop Only)
             const cards = gsap.utils.toArray(".testimonial-card");
 
-            // Initial setup for cards (stacking)
-            cards.forEach((card, i) => {
-                if (i > 0) {
-                    // Initial state for stacking cards with a slight rotation offset
-                    gsap.set(card, { yPercent: 120, scale: 0.9, opacity: 0, rotation: i % 2 === 0 ? 5 : -5 });
-                }
-            });
+            ScrollTrigger.matchMedia({
+                // Desktop only: screen width >= 768px
+                "(min-width: 768px)": function () {
+                    // Initial setup for cards (stacking)
+                    cards.forEach((card, i) => {
+                        if (i > 0) {
+                            gsap.set(card, { yPercent: 120, scale: 0.9, opacity: 0, rotation: i % 2 === 0 ? 5 : -5 });
+                        }
+                    });
 
-            const testimonialTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#testimonials",
-                    start: "top top",
-                    end: `+=${cards.length * 80}%`,
-                    pinSpacing: true,
-                    pin: true,
-                    scrub: 1,
-                }
-            });
+                    const testimonialTl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: "#testimonials",
+                            start: "top top",
+                            end: `+=${cards.length * 80}%`,
+                            pinSpacing: true,
+                            pin: true,
+                            scrub: 1,
+                        }
+                    });
 
-            cards.forEach((card, i) => {
-                const tilt = (i % 2 === 0 ? 2 : -2) + (Math.random() * 0.5);
+                    cards.forEach((card, i) => {
+                        const tilt = (i % 2 === 0 ? 3 : -3) + (Math.random() * 0.5);
 
-                if (i > 0) {
-                    testimonialTl.to(card, {
-                        yPercent: 0,
-                        rotation: tilt,
-                        scale: 1,
-                        opacity: 1,
-                        duration: 1,
-                        ease: "power2.out",
-                    })
-                        .to(cards[i - 1], {
-                            scale: 0.95,
-                            opacity: 0.8,
-                            filter: "blur(4px)",
-                            rotation: tilt * 0.4,
+                        if (i > 0) {
+                            testimonialTl.to(card, {
+                                yPercent: 0,
+                                rotation: tilt,
+                                scale: 1,
+                                opacity: 1,
+                                duration: 1,
+                                ease: "power2.out",
+                            })
+                                .to(cards[i - 1], {
+                                    scale: 0.95,
+                                    opacity: 0.8,
+                                    filter: "blur(4px)",
+                                    rotation: tilt * 0.4,
+                                    duration: 1,
+                                    ease: "power2.out",
+                                }, "<");
+                        } else {
+                            gsap.set(cards[0], { rotation: -1.5 });
+                        }
+                    });
+                },
+
+                // Mobile/Tablet: screen width < 768px
+                "(max-width: 767px)": function () {
+                    // Simple entrance animation for cards
+                    cards.forEach((card, i) => {
+                        gsap.set(card, { y: 40, opacity: 0, scale: 1, rotation: 0, clearProps: "all" });
+
+                        gsap.from(card, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 90%",
+                                toggleActions: "play none none reverse"
+                            },
+                            y: 40,
+                            opacity: 0,
                             duration: 1,
-                            ease: "power2.out",
-                        }, "<");
-                } else {
-                    gsap.set(cards[0], { rotation: -1.5 });
+                            ease: "power3.out"
+                        });
+                    });
                 }
             });
 
@@ -769,8 +804,10 @@
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: row,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
+                        start: "top 90%",
+                        end: "bottom top",
+                        toggleActions: "play none none reverse",
+                        scrub: 1,
                     }
                 });
 
